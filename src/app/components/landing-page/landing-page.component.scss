@@ -1,0 +1,29 @@
+.wrap {
+  font-family: "Roboto";
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+
+  h1 {
+    display: flex;
+    font-weight: 400;
+    font-size: 80px;
+    line-height: 100%;
+    margin: 124px 0 0 24px;
+  }
+
+  .actions {
+    display: flex;
+    button {
+      background-color: #1d1d1d;
+      color: #ffffff;
+      border: 1px solid #ffffff1a;
+      backdrop-filter: blur(50px);
+      width: 100%;
+      height: 48px;
+      border-radius: 16px;
+      margin: 0 24px 48px 24px;
+    }
+  }
+}

@@ -1,0 +1,36 @@
+<div>
+  <h2>Välj en tid</h2>
+
+  <div class="dropdown">
+    <button class="dropdown-toggle">
+      <span>Mötesrum</span>
+      <img src="./../../../assets/icons/chevron-down.png" alt="" />
+    </button>
+    <div class="dropdown-menu">
+      <label *ngFor="let room of rooms">
+        <input [(ngModel)]="room.selected" type="checkbox" checked />
+        {{ room.name }} ({{ room.capacity }} personer)
+      </label>
+
+      <div class="dropdown-actions">
+        <button (click)="confirmRoomSelection()" class="btn select">
+          Välj
+        </button>
+        <button (click)="deselectRooms()" class="btn deselect">
+          Avmarkera
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngFor="let room of rooms">
+  <div *ngIf="room.selected">
+    <label *ngFor="let slot of room.timeSlots">
+      <input type="checkbox" name="{{ room.id }}" [(ngModel)]="slot.selected" />
+      {{ slot.start_time }} - {{ slot.end_time }} - {{room.name}}
+    </label>
+  </div>
+</div>
+
+<!-- <button (click)="next()">Next</button> -->
