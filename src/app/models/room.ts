@@ -5,5 +5,5 @@ export class Room {
   name: string = '';
   capacity: number = 0;
   selected: boolean = false;
-  timeSlots: TimeSlot[] = [];
+  timeSlotsByDate: { date: string; slots: TimeSlot[] }[] = [];
 }

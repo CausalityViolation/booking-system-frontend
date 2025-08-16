@@ -2,21 +2,29 @@
   <h2>Välj en tid</h2>
 
   <div class="dropdown">
-    <button class="dropdown-toggle">
-      <span>Mötesrum</span>
-      <img src="./../../../assets/icons/chevron-down.png" alt="" />
+    <button (click)="toggleMenu = !toggleMenu" class="dropdown-toggle">
+      <span>{{ displayText() }}</span>
+      <img
+        [ngClass]="{ rotate: toggleMenu }"
+        src="./../../../assets/icons/chevron-down.png"
+      />
     </button>
-    <div class="dropdown-menu">
+    <div *ngIf="toggleMenu" class="dropdown-menu">
       <label *ngFor="let room of rooms">
-        <input [(ngModel)]="room.selected" type="checkbox" checked />
         {{ room.name }} ({{ room.capacity }} personer)
+        <input
+          (click)="roomCounter(room.id)"
+          [(ngModel)]="room.selected"
+          type="checkbox"
+          checked
+        />
       </label>
 
       <div class="dropdown-actions">
-        <button (click)="confirmRoomSelection()" class="btn select">
+        <button (click)="toggleMenu = !toggleMenu" class="btn select">
           Välj
         </button>
-        <button (click)="deselectRooms()" class="btn deselect">
+        <button (click)="removeFilters()" class="btn deselect">
           Avmarkera
         </button>
       </div>
@@ -24,13 +32,32 @@
   </div>
 </div>
 
-<div *ngFor="let room of rooms">
-  <div *ngIf="room.selected">
-    <label *ngFor="let slot of room.timeSlots">
-      <input type="checkbox" name="{{ room.id }}" [(ngModel)]="slot.selected" />
-      {{ slot.start_time }} - {{ slot.end_time }} - {{room.name}}
-    </label>
+<!-- Just hardcoded for now. Might add this functionality later if time permits -->
+<div class="date-changer">
+  <img src="./../../../assets/icons/left-arrow.png" />
+  <span>18 oct - 20 oct</span>
+  <img src="./../../../assets/icons/right-arrow.png" />
+</div>
+
+<div class="date-table-container">
+  <div class="date-column" *ngFor="let date of dates">
+    <div class="date-header">{{ date | date : "MMM d" }}</div>
+
+    <ng-container *ngFor="let room of rooms">
+      <ng-container *ngIf="room.selected">
+        <ng-container *ngFor="let timeSlot of room.timeSlotsByDate">
+          <div *ngIf="timeSlot.date === date" class="time-slots">
+            <div *ngFor="let slot of timeSlot.slots" class="slot">
+              {{ room.name }} ({{ room.capacity }}) {{ slot.start_time }} -
+              {{ slot.end_time }}
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </ng-container>
   </div>
 </div>
 
-<!-- <button (click)="next()">Next</button> -->
+<div class="actions">
+  <button (click)="next()">Nästa</button>
+</div>

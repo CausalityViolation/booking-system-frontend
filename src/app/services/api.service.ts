@@ -14,9 +14,13 @@ export class ApiService {
     return this.httpClient.get<Room[]>(`${this.baseUrl}/rooms`);
   }
 
-  getAvailableSlots(roomId: number, date: string): Observable<TimeSlot[]> {
-    return this.httpClient.get<TimeSlot[]>(
-      `http://localhost:3001/api/rooms/${roomId}/available?date=${date}`
+  getAvailableSlots(
+    roomId: number,
+    dates: string[]
+  ): Observable<{ date: string; slots: TimeSlot[] }[]> {
+    const query = dates.join(',');
+    return this.httpClient.get<{ date: string; slots: TimeSlot[] }[]>(
+      `http://localhost:3001/api/rooms/${roomId}/available?dates=${query}`
     );
   }
 

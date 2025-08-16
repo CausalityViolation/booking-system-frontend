@@ -14,36 +14,49 @@ import { ApiService } from '../../services/api.service';
 })
 export class RoomSelectionComponent {
   rooms: Room[] = [];
-  selectedDate = '2025-10-18'; // hardcoded for now
+  dates = ['2025-10-18', '2025-10-19', '2025-10-20']; // hardcoded for now
 
   //Create HTML so it shows the available times for the selected ID
   selectedRoomID = 0;
+  selectedRooms: number[] = [];
+  toggleMenu = false;
+  showTimeSlots = false;
 
   constructor(private api: ApiService, public router: Router) {}
 
   ngOnInit() {
-    this.api.getRooms().subscribe((data) => (this.rooms = data));
-  }
-
-  confirmRoomSelection() {
-    this.rooms.forEach((room) => {
-      if (room.selected) {
+    this.api.getRooms().subscribe((data) => {
+      this.rooms = data;
+      this.rooms.forEach((room) => {
+        room.selected = true;
         this.selectedRoomID = room.id;
         this.api
-          .getAvailableSlots(room.id, this.selectedDate)
-          .subscribe((slots) => (room.timeSlots = slots));
-      } else {
-        room.timeSlots = [];
-        // Also unselect any previously selected slot
-        room.timeSlots?.forEach((s) => (s.selected = false));
-      }
+          .getAvailableSlots(room.id, this.dates)
+          .subscribe((slots) => (room.timeSlotsByDate = slots));
+      });
     });
   }
 
-  deselectRooms() {
+  roomCounter(roomID: number) {
+    const index = this.selectedRooms.indexOf(roomID);
+    if (index === -1) {
+      this.selectedRooms.push(roomID);
+    } else {
+      this.selectedRooms.splice(index, 1);
+    }
+  }
+
+  removeFilters() {
+    this.showTimeSlots = false;
+    this.selectedRooms = [];
     this.rooms.forEach((room) => {
       room.selected = false;
     });
+  }
+
+  displayText(): string {
+    const count = this.rooms.filter((room) => room.selected).length;
+    return count ? `${count} valda rum` : 'Mötesrum';
   }
 
   next() {
