@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Room } from '../models/room';
+import { Selected } from '../models/selected';
 import { TimeSlot } from '../models/timeslot';
 
 @Injectable({ providedIn: 'root' })
@@ -9,6 +10,19 @@ export class ApiService {
   private baseUrl = 'http://localhost:3001/api';
 
   constructor(private httpClient: HttpClient) {}
+
+  private selectedBooking = new BehaviorSubject<Selected>({
+    roomId: 0,
+    timeSlotId: 0,
+    date: '',
+    bookedBy: '',
+  });
+
+  selected$ = this.selectedBooking.asObservable();
+
+  setSelected(selected: Selected) {
+    this.selectedBooking.next(selected);
+  }
 
   getRooms(): Observable<Room[]> {
     return this.httpClient.get<Room[]>(`${this.baseUrl}/rooms`);

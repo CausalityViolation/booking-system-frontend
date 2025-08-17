@@ -47,7 +47,14 @@
       <ng-container *ngIf="room.selected">
         <ng-container *ngFor="let timeSlot of room.timeSlotsByDate">
           <div *ngIf="timeSlot.date === date" class="time-slots">
-            <div *ngFor="let slot of timeSlot.slots" class="slot">
+            <div
+              [ngClass]="{
+                highlight: selection.timeSlotId === slot.id
+              }"
+              (click)="selectTimeSlot(room.id, slot, timeSlot.date)"
+              *ngFor="let slot of timeSlot.slots"
+              class="slot"
+            >
               {{ room.name }} ({{ room.capacity }}) {{ slot.start_time }} -
               {{ slot.end_time }}
             </div>

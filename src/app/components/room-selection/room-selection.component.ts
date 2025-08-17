@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Room } from '../../models/room';
+import { Selected } from '../../models/selected';
+import { TimeSlot } from '../../models/timeslot';
 import { ApiService } from '../../services/api.service';
 
 @Component({
@@ -21,6 +23,13 @@ export class RoomSelectionComponent {
   selectedRooms: number[] = [];
   toggleMenu = false;
   showTimeSlots = false;
+
+  selection: Selected = {
+    roomId: 0,
+    timeSlotId: 0,
+    date: '',
+    bookedBy: '',
+  };
 
   constructor(private api: ApiService, public router: Router) {}
 
@@ -52,6 +61,16 @@ export class RoomSelectionComponent {
     this.rooms.forEach((room) => {
       room.selected = false;
     });
+  }
+
+  selectTimeSlot(roomID: number, timeSlot: TimeSlot, date: string) {
+    this.selection = {
+      roomId: roomID,
+      timeSlotId: timeSlot.id,
+      date: date,
+      bookedBy: '',
+    };
+    this.api.setSelected(this.selection);
   }
 
   displayText(): string {
