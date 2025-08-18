@@ -79,7 +79,6 @@ export class RoomSelectionComponent {
   }
 
   next() {
-    // this.api.setSelectedRooms(this.rooms); // only rooms with room.selected = true
-    this.router.navigate(['/booking-form']);
+    this.router.navigate(['/confirm-user']);
   }
 }

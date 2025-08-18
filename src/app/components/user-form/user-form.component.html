@@ -1,7 +1,22 @@
-<h2>Who is booking?</h2>
-<input [(ngModel)]="bookedBy" placeholder="Your name" />
-<button
-  (click)="confirmBooking()"
->
-  Confirm
-</button>
+<div class="wrap">
+  <div class="input-wrap">
+    <h2>Vem bokar?</h2>
+    <p>Förnamn och efternamn</p>
+    <input
+      [(ngModel)]="selected.bookedBy"
+      placeholder="Skriv ditt fullständiga namn här"
+    />
+  </div>
+
+  <!-- Wrap here in case of more buttons and continue to build the app -->
+  <div class="actions">
+    <button [disabled]="!selected.bookedBy" (click)="confirmBooking()">
+      Boka
+    </button>
+  </div>
+</div>
+
+<app-confirmation-modal id="booking-confirmed">
+  Ditt rum är bokat!
+  <img src="../../../assets/icons/smiley.png" />
+</app-confirmation-modal>

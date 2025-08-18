@@ -38,17 +38,7 @@ export class ApiService {
     );
   }
 
-  bookSlot(
-    roomId: number,
-    timeSlotId: number,
-    date: string,
-    bookedBy: string
-  ): Observable<any> {
-    return this.httpClient.post(`${this.baseUrl}/bookings`, {
-      roomId,
-      timeSlotId,
-      date,
-      bookedBy,
-    });
+  bookSlot(selected: Selected): Observable<boolean> {
+    return this.httpClient.post<boolean>(`${this.baseUrl}/bookings`, selected);
   }
 }

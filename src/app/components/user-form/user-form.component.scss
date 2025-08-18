@@ -1,0 +1,62 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+
+  .input-wrap {
+    margin: 0 24px 0 24px;
+
+    h2 {
+      margin: 80px 0 48px 0;
+      font-family: "Roboto";
+      font-weight: 400;
+      font-size: 40px;
+    }
+
+    p {
+      font-family: "Roboto";
+      font-weight: 500;
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      width: 100%;
+      border: 1px solid #bdbdbd;
+      border-radius: 8px;
+      height: 48px;
+      font-size: 18px;
+      box-sizing: border-box;
+      padding-left: 16px;
+    }
+  }
+
+  .actions {
+    display: flex;
+    button {
+      background-color: #1d1d1d;
+      color: #ffffff;
+      border: 1px solid #ffffff1a;
+      backdrop-filter: blur(50px);
+      width: 100%;
+      height: 48px;
+      border-radius: 16px;
+      margin: 0 24px 48px 24px;
+      transition: 0.2s ease;
+    }
+
+    button:disabled {
+      background-color: #ccc;
+      color: #666;
+      opacity: 0.7;
+    }
+  }
+}
+
+app-confirmation-modal {
+  img {
+    margin-top: 16px;
+  }
+}

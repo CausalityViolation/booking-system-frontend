@@ -1,1 +1,5 @@
-<p>confirmation-modal works!</p>
+<div class="modal-background" [ngClass]="{ show: isShowing }" #background>
+  <div class="modal-body" [style.background-color]="backgroundColor">
+    <ng-content></ng-content>
+  </div>
+</div>
