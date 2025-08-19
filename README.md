@@ -23,12 +23,27 @@ Select a phone model, e.g., Samsung Galaxy S20, to preview the layout.
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
+## To-do/Improvements
+
+Add an endpoint: DELETE /api/bookings/:id
+
+Allow admins to cancel/remove bookings.
+
+Free up the associated timeslot after deletion.
+
+Add login/registration.
+
+Define roles (user, admin) to protect sensitive routes.
+
+Only admins can remove bookings or see all bookings.
+
+Extend GET /api/rooms/:id/available to support ?days=5 to fetch next i.e. 5 days to buffer (basically make it smoother for the user)
+
+Change the date-selector to a more traditional calendar so the user can select a date or a range of dates to display.
+
+Send email confirmations(?)
 
