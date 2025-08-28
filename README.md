@@ -1,6 +1,8 @@
 Booking System Frontend
 Overview
 
+## This app was built as part of a coding test, and the UI design follows the Figma mockup provided by the company (so the visuals aren’t mine). 
+
 ## Make sure the backend (Booking system backend) is running at http://localhost:3001 as well!
 
 This is an Angular standalone component project that allows users to:
