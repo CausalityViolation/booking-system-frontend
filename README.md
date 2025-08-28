@@ -31,6 +31,8 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## To-do/Improvements
 
+Remove hard-coded API baseURL
+
 Add an endpoint: DELETE /api/bookings/:id
 
 Allow admins to cancel/remove bookings.
